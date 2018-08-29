@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.OrdersDao">
+<resultMap type="com.demo.domain.Orders" id="Orders" >
+	 <id property="id" column="id" />
+	 <result property="enquiryOrderId" column="enquiry_order_id" />
+	 <result property="clinicId" column="clinic_id" />
+	 <result property="clinicName" column="clinic_name" />
+	 <result property="totalPrice" column="total_price" />
+	 <result property="totalNum" column="total_num" />
+	 <result property="provinceCode" column="province_code" />
+	 <result property="cityCode" column="city_code" />
+	 <result property="areaCode" column="area_code" />
+	 <result property="address" column="address" />
+	 <result property="orderNum" column="order_num" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="dateCreated" column="date_created" />
+</resultMap>
+<select id="get" resultMap="Orders" parameterType="String">
+	select * from orders where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.Orders">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into orders ( id,enquiry_order_id,clinic_id,clinic_name,total_price,total_num,province_code,city_code,area_code,address,order_num,last_updated,date_created )  values ( #{id},#{enquiryOrderId},#{clinicId},#{clinicName},#{totalPrice},#{totalNum},#{provinceCode},#{cityCode},#{areaCode},#{address},#{orderNum},#{lastUpdated},#{dateCreated} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.Orders">
+	update orders set enquiry_order_id=#{enquiryOrderId},clinic_id=#{clinicId},clinic_name=#{clinicName},total_price=#{totalPrice},total_num=#{totalNum},province_code=#{provinceCode},city_code=#{cityCode},area_code=#{areaCode},address=#{address},order_num=#{orderNum},last_updated=#{lastUpdated},date_created=#{dateCreated} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from orders where id = #{id}
+</delete>
+</mapper>

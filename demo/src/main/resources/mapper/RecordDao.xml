@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.RecordDao">
+<resultMap type="com.demo.domain.Record" id="Record" >
+	 <id property="id" column="id" />
+	 <result property="account" column="account" />
+	 <result property="password" column="password" />
+	 <result property="createTime" column="create_time" />
+	 <result property="k" column="k" />
+	 <result property="location" column="location" />
+</resultMap>
+<select id="get" resultMap="Record" parameterType="String">
+	select * from record where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.Record">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into record ( id,account,password,create_time,k,location )  values ( #{id},#{account},#{password},#{createTime},#{k},#{location} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.Record">
+	update record set account=#{account},password=#{password},create_time=#{createTime},k=#{k},location=#{location} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from record where id = #{id}
+</delete>
+</mapper>

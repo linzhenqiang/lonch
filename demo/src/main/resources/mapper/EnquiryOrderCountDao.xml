@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.EnquiryOrderCountDao">
+<resultMap type="com.demo.domain.EnquiryOrderCount" id="EnquiryOrderCount" >
+	 <id property="id" column="id" />
+	 <result property="enquiryOrderId" column="enquiry_order_id" />
+	 <result property="medicinalTypeNum" column="medicinal_type_num" />
+	 <result property="totalNum" column="total_num" />
+	 <result property="offerCompanyNum" column="offer_company_num" />
+	 <result property="offerMedicinalNum" column="offer_medicinal_num" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+</resultMap>
+<select id="get" resultMap="EnquiryOrderCount" parameterType="String">
+	select * from enquiry_order_count where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.EnquiryOrderCount">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into enquiry_order_count ( id,enquiry_order_id,medicinal_type_num,total_num,offer_company_num,offer_medicinal_num,date_created,last_updated )  values ( #{id},#{enquiryOrderId},#{medicinalTypeNum},#{totalNum},#{offerCompanyNum},#{offerMedicinalNum},#{dateCreated},#{lastUpdated} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.EnquiryOrderCount">
+	update enquiry_order_count set enquiry_order_id=#{enquiryOrderId},medicinal_type_num=#{medicinalTypeNum},total_num=#{totalNum},offer_company_num=#{offerCompanyNum},offer_medicinal_num=#{offerMedicinalNum},date_created=#{dateCreated},last_updated=#{lastUpdated} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from enquiry_order_count where id = #{id}
+</delete>
+</mapper>

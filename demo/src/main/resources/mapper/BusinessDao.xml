@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.BusinessDao">
+<resultMap type="com.demo.domain.Business" id="Business" >
+	 <id property="id" column="id" />
+	 <result property="companyName" column="company_name" />
+	 <result property="name" column="name" />
+	 <result property="phone" column="phone" />
+	 <result property="companyCode" column="company_code" />
+	 <result property="provinceCode" column="province_code" />
+	 <result property="provinceName" column="province_name" />
+	 <result property="cityCode" column="city_code" />
+	 <result property="cityName" column="city_name" />
+	 <result property="areaCode" column="area_code" />
+	 <result property="areaName" column="area_name" />
+	 <result property="address" column="address" />
+	 <result property="isPass" column="is_pass" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="status" column="status" />
+	 <result property="orgId" column="org_id" />
+	 <result property="lon" column="lon" />
+	 <result property="lat" column="lat" />
+	 <result property="aliasName" column="alias_name" />
+	 <result property="legalPerson" column="legal_person" />
+	 <result property="pic" column="pic" />
+	 <result property="website" column="website" />
+	 <result property="isFrom" column="is_from" />
+	 <result property="code" column="code" />
+	 <result property="other" column="other" />
+</resultMap>
+<select id="get" resultMap="Business" parameterType="String">
+	select * from business where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.Business">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into business ( id,company_name,name,phone,company_code,province_code,province_name,city_code,city_name,area_code,area_name,address,is_pass,date_created,last_updated,status,org_id,lon,lat,alias_name,legal_person,pic,website,is_from,code,other )  values ( #{id},#{companyName},#{name},#{phone},#{companyCode},#{provinceCode},#{provinceName},#{cityCode},#{cityName},#{areaCode},#{areaName},#{address},#{isPass},#{dateCreated},#{lastUpdated},#{status},#{orgId},#{lon},#{lat},#{aliasName},#{legalPerson},#{pic},#{website},#{isFrom},#{code},#{other} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.Business">
+	update business set company_name=#{companyName},name=#{name},phone=#{phone},company_code=#{companyCode},province_code=#{provinceCode},province_name=#{provinceName},city_code=#{cityCode},city_name=#{cityName},area_code=#{areaCode},area_name=#{areaName},address=#{address},is_pass=#{isPass},date_created=#{dateCreated},last_updated=#{lastUpdated},status=#{status},org_id=#{orgId},lon=#{lon},lat=#{lat},alias_name=#{aliasName},legal_person=#{legalPerson},pic=#{pic},website=#{website},is_from=#{isFrom},code=#{code},other=#{other} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from business where id = #{id}
+</delete>
+<select id="getList" resultMap="Business" parameterType="Map">
+	select * from business
+</select>
+</mapper>

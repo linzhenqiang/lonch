@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.OfferOrderInfoDao">
+<resultMap type="com.demo.domain.OfferOrderInfo" id="OfferOrderInfo" >
+	 <id property="id" column="id" />
+	 <result property="offerOrderId" column="offer_order_id" />
+	 <result property="enquiryOrderId" column="enquiry_order_id" />
+	 <result property="enquiryOrderInfoId" column="enquiry_order_info_id" />
+	 <result property="medicinalName" column="medicinal_name" />
+	 <result property="medicinalId" column="medicinal_id" />
+	 <result property="norms" column="norms" />
+	 <result property="price" column="price" />
+	 <result property="num" column="num" />
+	 <result property="isOffer" column="is_offer" />
+	 <result property="isSave" column="is_save" />
+	 <result property="smallUnit" column="small_unit" />
+	 <result property="scaler" column="scaler" />
+	 <result property="unit" column="unit" />
+	 <result property="invalidTime" column="invalid_time" />
+	 <result property="totalPrice" column="total_price" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="medicinalCompanyName" column="medicinal_company_name" />
+	 <result property="businessId" column="business_id" />
+</resultMap>
+<select id="get" resultMap="OfferOrderInfo" parameterType="String">
+	select * from offer_order_info where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.OfferOrderInfo">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into offer_order_info ( id,offer_order_id,enquiry_order_id,enquiry_order_info_id,medicinal_name,medicinal_id,norms,price,num,is_offer,is_save,small_unit,scaler,unit,invalid_time,total_price,date_created,last_updated,medicinal_company_name,business_id )  values ( #{id},#{offerOrderId},#{enquiryOrderId},#{enquiryOrderInfoId},#{medicinalName},#{medicinalId},#{norms},#{price},#{num},#{isOffer},#{isSave},#{smallUnit},#{scaler},#{unit},#{invalidTime},#{totalPrice},#{dateCreated},#{lastUpdated},#{medicinalCompanyName},#{businessId} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.OfferOrderInfo">
+	update offer_order_info set offer_order_id=#{offerOrderId},enquiry_order_id=#{enquiryOrderId},enquiry_order_info_id=#{enquiryOrderInfoId},medicinal_name=#{medicinalName},medicinal_id=#{medicinalId},norms=#{norms},price=#{price},num=#{num},is_offer=#{isOffer},is_save=#{isSave},small_unit=#{smallUnit},scaler=#{scaler},unit=#{unit},invalid_time=#{invalidTime},total_price=#{totalPrice},date_created=#{dateCreated},last_updated=#{lastUpdated},medicinal_company_name=#{medicinalCompanyName},business_id=#{businessId} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from offer_order_info where id = #{id}
+</delete>
+</mapper>

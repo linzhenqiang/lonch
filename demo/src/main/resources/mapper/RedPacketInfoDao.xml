@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.RedPacketInfoDao">
+<resultMap type="com.demo.domain.RedPacketInfo" id="RedPacketInfo" >
+	 <id property="id" column="id" />
+	 <result property="redPacketId" column="red_packet_id" />
+	 <result property="orderBusinessId" column="order_business_id" />
+	 <result property="clinicId" column="clinic_id" />
+	 <result property="activeId" column="active_id" />
+	 <result property="activeNum" column="active_num" />
+	 <result property="clinicName" column="clinic_name" />
+	 <result property="catchRedPacketNum" column="catch_red_packet_num" />
+	 <result property="sendType" column="send_type" />
+	 <result property="orderTotalPrice" column="order_total_price" />
+	 <result property="sendMoney" column="send_money" />
+	 <result property="startTime" column="start_time" />
+	 <result property="endTime" column="end_time" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="warehousingStatus" column="warehousing_status" />
+	 <result property="redStatus" column="red_status" />
+</resultMap>
+<select id="get" resultMap="RedPacketInfo" parameterType="String">
+	select * from red_packet_info where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.RedPacketInfo">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into red_packet_info ( id,red_packet_id,order_business_id,clinic_id,active_id,active_num,clinic_name,catch_red_packet_num,send_type,order_total_price,send_money,start_time,end_time,date_created,last_updated,warehousing_status,red_status )  values ( #{id},#{redPacketId},#{orderBusinessId},#{clinicId},#{activeId},#{activeNum},#{clinicName},#{catchRedPacketNum},#{sendType},#{orderTotalPrice},#{sendMoney},#{startTime},#{endTime},#{dateCreated},#{lastUpdated},#{warehousingStatus},#{redStatus} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.RedPacketInfo">
+	update red_packet_info set red_packet_id=#{redPacketId},order_business_id=#{orderBusinessId},clinic_id=#{clinicId},active_id=#{activeId},active_num=#{activeNum},clinic_name=#{clinicName},catch_red_packet_num=#{catchRedPacketNum},send_type=#{sendType},order_total_price=#{orderTotalPrice},send_money=#{sendMoney},start_time=#{startTime},end_time=#{endTime},date_created=#{dateCreated},last_updated=#{lastUpdated},warehousing_status=#{warehousingStatus},red_status=#{redStatus} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from red_packet_info where id = #{id}
+</delete>
+</mapper>

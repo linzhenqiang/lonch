@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ActivityReasonDao">
+<resultMap type="com.demo.domain.ActivityReason" id="ActivityReason" >
+	 <id property="id" column="id" />
+	 <result property="activityId" column="activity_id" />
+	 <result property="reason" column="reason" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+</resultMap>
+<select id="get" resultMap="ActivityReason" parameterType="String">
+	select * from activity_reason where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.ActivityReason">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into activity_reason ( id,activity_id,reason,date_created,last_updated )  values ( #{id},#{activityId},#{reason},#{dateCreated},#{lastUpdated} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.ActivityReason">
+	update activity_reason set activity_id=#{activityId},reason=#{reason},date_created=#{dateCreated},last_updated=#{lastUpdated} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from activity_reason where id = #{id}
+</delete>
+</mapper>

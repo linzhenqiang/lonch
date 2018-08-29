@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ClinicBaseDao">
+<resultMap type="com.demo.domain.ClinicBase" id="ClinicBase" >
+	 <id property="id" column="id" />
+	 <result property="orgId" column="org_id" />
+	 <result property="clinicName" column="clinic_name" />
+	 <result property="legalPerson" column="legal_person" />
+	 <result property="legalPhone" column="legal_phone" />
+	 <result property="contactsPerson" column="contacts_person" />
+	 <result property="contactsPhone" column="contacts_phone" />
+	 <result property="province" column="province" />
+	 <result property="city" column="city" />
+	 <result property="area" column="area" />
+	 <result property="address" column="address" />
+	 <result property="lon" column="lon" />
+	 <result property="lat" column="lat" />
+	 <result property="clinicType" column="clinic_type" />
+	 <result property="collectAddress" column="collect_address" />
+	 <result property="clinicpeSpecial" column="clinicpe_special" />
+	 <result property="managerScope" column="manager_scope" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="provinceName" column="province_name" />
+	 <result property="cityName" column="city_name" />
+	 <result property="areaName" column="area_name" />
+	 <result property="isUse" column="is_use" />
+	 <result property="isFrom" column="is_from" />
+</resultMap>
+<select id="get" resultMap="ClinicBase" parameterType="String">
+	select * from clinic_base where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.ClinicBase">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into clinic_base ( id,org_id,clinic_name,legal_person,legal_phone,contacts_person,contacts_phone,province,city,area,address,lon,lat,clinic_type,collect_address,clinicpe_special,manager_scope,date_created,last_updated,province_name,city_name,area_name,is_use,is_from )  values ( #{id},#{orgId},#{clinicName},#{legalPerson},#{legalPhone},#{contactsPerson},#{contactsPhone},#{province},#{city},#{area},#{address},#{lon},#{lat},#{clinicType},#{collectAddress},#{clinicpeSpecial},#{managerScope},#{dateCreated},#{lastUpdated},#{provinceName},#{cityName},#{areaName},#{isUse},#{isFrom} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.ClinicBase">
+	update clinic_base set org_id=#{orgId},clinic_name=#{clinicName},legal_person=#{legalPerson},legal_phone=#{legalPhone},contacts_person=#{contactsPerson},contacts_phone=#{contactsPhone},province=#{province},city=#{city},area=#{area},address=#{address},lon=#{lon},lat=#{lat},clinic_type=#{clinicType},collect_address=#{collectAddress},clinicpe_special=#{clinicpeSpecial},manager_scope=#{managerScope},date_created=#{dateCreated},last_updated=#{lastUpdated},province_name=#{provinceName},city_name=#{cityName},area_name=#{areaName},is_use=#{isUse},is_from=#{isFrom} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from clinic_base where id = #{id}
+</delete>
+</mapper>

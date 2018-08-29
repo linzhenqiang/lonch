@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.SysDictionaryDao">
+<resultMap type="com.demo.domain.SysDictionary" id="SysDictionary" >
+	 <id property="id" column="id" />
+	 <result property="name" column="name" />
+	 <result property="code" column="code" />
+	 <result property="parentId" column="parent_id" />
+	 <result property="baseVersion" column="base_version" />
+	 <result property="status" column="status" />
+	 <result property="isDelete" column="is_delete" />
+	 <result property="orderNum" column="order_num" />
+	 <result property="remark" column="remark" />
+</resultMap>
+<select id="get" resultMap="SysDictionary" parameterType="String">
+	select * from sys_dictionary where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.SysDictionary">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into sys_dictionary ( id,name,code,parent_id,base_version,status,is_delete,order_num,remark )  values ( #{id},#{name},#{code},#{parentId},#{baseVersion},#{status},#{isDelete},#{orderNum},#{remark} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.SysDictionary">
+	update sys_dictionary set name=#{name},code=#{code},parent_id=#{parentId},base_version=#{baseVersion},status=#{status},is_delete=#{isDelete},order_num=#{orderNum},remark=#{remark} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from sys_dictionary where id = #{id}
+</delete>
+</mapper>

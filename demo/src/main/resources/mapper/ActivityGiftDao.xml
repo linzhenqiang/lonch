@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ActivityGiftDao">
+<resultMap type="com.demo.domain.ActivityGift" id="ActivityGift" >
+	 <id property="id" column="id" />
+	 <result property="activityInfoId" column="activity_info_id" />
+	 <result property="type" column="type" />
+	 <result property="num" column="num" />
+	 <result property="unit" column="unit" />
+	 <result property="name" column="name" />
+	 <result property="medicinalBasicId" column="medicinal_basic_id" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdate" column="last_update" />
+</resultMap>
+<select id="get" resultMap="ActivityGift" parameterType="String">
+	select * from activity_gift where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.ActivityGift">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into activity_gift ( id,activity_info_id,type,num,unit,name,medicinal_basic_id,date_created,last_update )  values ( #{id},#{activityInfoId},#{type},#{num},#{unit},#{name},#{medicinalBasicId},#{dateCreated},#{lastUpdate} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.ActivityGift">
+	update activity_gift set activity_info_id=#{activityInfoId},type=#{type},num=#{num},unit=#{unit},name=#{name},medicinal_basic_id=#{medicinalBasicId},date_created=#{dateCreated},last_update=#{lastUpdate} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from activity_gift where id = #{id}
+</delete>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.SysUserInfoDao">
+<resultMap type="com.demo.domain.SysUserInfo" id="SysUserInfo" >
+	 <id property="id" column="id" />
+	 <result property="sysUserId" column="sys_user_id" />
+	 <result property="realName" column="real_name" />
+	 <result property="birthDay" column="birth_day" />
+	 <result property="idCard" column="id_card" />
+	 <result property="phone" column="phone" />
+	 <result property="provinceCode" column="province_code" />
+	 <result property="cityCode" column="city_code" />
+	 <result property="areaCode" column="area_code" />
+	 <result property="distributionArea" column="distribution_area" />
+	 <result property="nickName" column="nick_name" />
+	 <result property="sex" column="sex" />
+	 <result property="portraitImg" column="portrait_img" />
+	 <result property="address" column="address" />
+	 <result property="type" column="type" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="provinceName" column="province_name" />
+	 <result property="cityName" column="city_name" />
+	 <result property="areaName" column="area_name" />
+</resultMap>
+<select id="get" resultMap="SysUserInfo" parameterType="String">
+	select * from sys_user_info where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.SysUserInfo">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into sys_user_info ( id,sys_user_id,real_name,birth_day,id_card,phone,province_code,city_code,area_code,distribution_area,nick_name,sex,portrait_img,address,type,date_created,last_updated,province_name,city_name,area_name )  values ( #{id},#{sysUserId},#{realName},#{birthDay},#{idCard},#{phone},#{provinceCode},#{cityCode},#{areaCode},#{distributionArea},#{nickName},#{sex},#{portraitImg},#{address},#{type},#{dateCreated},#{lastUpdated},#{provinceName},#{cityName},#{areaName} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.SysUserInfo">
+	update sys_user_info set sys_user_id=#{sysUserId},real_name=#{realName},birth_day=#{birthDay},id_card=#{idCard},phone=#{phone},province_code=#{provinceCode},city_code=#{cityCode},area_code=#{areaCode},distribution_area=#{distributionArea},nick_name=#{nickName},sex=#{sex},portrait_img=#{portraitImg},address=#{address},type=#{type},date_created=#{dateCreated},last_updated=#{lastUpdated},province_name=#{provinceName},city_name=#{cityName},area_name=#{areaName} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from sys_user_info where id = #{id}
+</delete>
+</mapper>

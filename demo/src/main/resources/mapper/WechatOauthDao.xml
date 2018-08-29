@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.WechatOauthDao">
+<resultMap type="com.demo.domain.WechatOauth" id="WechatOauth" >
+	 <id property="id" column="id" />
+	 <result property="content" column="content" />
+	 <result property="remark" column="remark" />
+	 <result property="createTime" column="create_time" />
+	 <result property="updateTime" column="update_time" />
+</resultMap>
+<select id="get" resultMap="WechatOauth" parameterType="String">
+	select * from wechat_oauth where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.WechatOauth">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into wechat_oauth ( id,content,remark,create_time,update_time )  values ( #{id},#{content},#{remark},#{createTime},#{updateTime} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.WechatOauth">
+	update wechat_oauth set content=#{content},remark=#{remark},create_time=#{createTime},update_time=#{updateTime} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from wechat_oauth where id = #{id}
+</delete>
+</mapper>

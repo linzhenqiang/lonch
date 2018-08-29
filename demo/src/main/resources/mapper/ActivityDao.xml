@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ActivityDao">
+<resultMap type="com.demo.domain.Activity" id="Activity" >
+	 <id property="id" column="id" />
+	 <result property="businessId" column="business_id" />
+	 <result property="sysUserId" column="sys_user_id" />
+	 <result property="theme" column="theme" />
+	 <result property="startTime" column="start_time" />
+	 <result property="endTime" column="end_time" />
+	 <result property="description" column="description" />
+	 <result property="activityNum" column="activity_num" />
+	 <result property="type" column="type" />
+	 <result property="discounts" column="discounts" />
+	 <result property="num" column="num" />
+	 <result property="url" column="url" />
+	 <result property="distributionArea" column="distribution_area" />
+	 <result property="freight" column="freight" />
+	 <result property="status" column="status" />
+	 <result property="isDelete" column="is_delete" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="examineTime" column="examine_time" />
+</resultMap>
+<select id="get" resultMap="Activity" parameterType="String">
+	select * from activity where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.Activity">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into activity ( id,business_id,sys_user_id,theme,start_time,end_time,description,activity_num,type,discounts,num,url,distribution_area,freight,status,is_delete,date_created,last_updated,examine_time )  values ( #{id},#{businessId},#{sysUserId},#{theme},#{startTime},#{endTime},#{description},#{activityNum},#{type},#{discounts},#{num},#{url},#{distributionArea},#{freight},#{status},#{isDelete},#{dateCreated},#{lastUpdated},#{examineTime} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.Activity">
+	update activity set business_id=#{businessId},sys_user_id=#{sysUserId},theme=#{theme},start_time=#{startTime},end_time=#{endTime},description=#{description},activity_num=#{activityNum},type=#{type},discounts=#{discounts},num=#{num},url=#{url},distribution_area=#{distributionArea},freight=#{freight},status=#{status},is_delete=#{isDelete},date_created=#{dateCreated},last_updated=#{lastUpdated},examine_time=#{examineTime} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from activity where id = #{id}
+</delete>
+</mapper>

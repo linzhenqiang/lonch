@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ClinicBehindDao">
+<resultMap type="com.demo.domain.ClinicBehind" id="ClinicBehind" >
+	 <id property="id" column="id" />
+	 <result property="clinicBaseId" column="clinic_base_id" />
+	 <result property="clinicNo" column="clinic_no" />
+	 <result property="licenceNo" column="licence_no" />
+	 <result property="licencePic" column="licence_pic" />
+	 <result property="regAddress" column="reg_address" />
+	 <result property="outpatientNum" column="outpatient_num" />
+	 <result property="acreage" column="acreage" />
+	 <result property="medicalTreatment" column="medical_treatment" />
+	 <result property="villageLicence" column="village_licence" />
+	 <result property="meLicence" column="me_licence" />
+	 <result property="cnMe" column="cn_me" />
+	 <result property="weMe" column="we_me" />
+	 <result property="recognitionNum" column="recognition_num" />
+	 <result property="doctorNum" column="doctor_num" />
+	 <result property="nurseNum" column="nurse_num" />
+	 <result property="insuranceType" column="insurance_type" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+</resultMap>
+<select id="get" resultMap="ClinicBehind" parameterType="String">
+	select * from clinic_behind where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.ClinicBehind">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into clinic_behind ( id,clinic_base_id,clinic_no,licence_no,licence_pic,reg_address,outpatient_num,acreage,medical_treatment,village_licence,me_licence,cn_me,we_me,recognition_num,doctor_num,nurse_num,insurance_type,date_created,last_updated )  values ( #{id},#{clinicBaseId},#{clinicNo},#{licenceNo},#{licencePic},#{regAddress},#{outpatientNum},#{acreage},#{medicalTreatment},#{villageLicence},#{meLicence},#{cnMe},#{weMe},#{recognitionNum},#{doctorNum},#{nurseNum},#{insuranceType},#{dateCreated},#{lastUpdated} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.ClinicBehind">
+	update clinic_behind set clinic_base_id=#{clinicBaseId},clinic_no=#{clinicNo},licence_no=#{licenceNo},licence_pic=#{licencePic},reg_address=#{regAddress},outpatient_num=#{outpatientNum},acreage=#{acreage},medical_treatment=#{medicalTreatment},village_licence=#{villageLicence},me_licence=#{meLicence},cn_me=#{cnMe},we_me=#{weMe},recognition_num=#{recognitionNum},doctor_num=#{doctorNum},nurse_num=#{nurseNum},insurance_type=#{insuranceType},date_created=#{dateCreated},last_updated=#{lastUpdated} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from clinic_behind where id = #{id}
+</delete>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.OrderBusinessDao">
+<resultMap type="com.demo.domain.OrderBusiness" id="OrderBusiness" >
+	 <id property="id" column="id" />
+	 <result property="ordersId" column="orders_id" />
+	 <result property="sysUserId" column="sys_user_id" />
+	 <result property="medicinalTypeNum" column="medicinal_type_num" />
+	 <result property="medicinalTotalNum" column="medicinal_total_num" />
+	 <result property="status" column="status" />
+	 <result property="companyName" column="company_name" />
+	 <result property="phone" column="phone" />
+	 <result property="freight" column="freight" />
+	 <result property="businessId" column="business_id" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="linkman" column="linkman" />
+	 <result property="deliveryTime" column="delivery_time" />
+	 <result property="receivingTime" column="receiving_time" />
+	 <result property="orderNum" column="order_num" />
+	 <result property="isFrom" column="is_from" />
+</resultMap>
+<select id="get" resultMap="OrderBusiness" parameterType="String">
+	select * from order_business where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.OrderBusiness">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into order_business ( id,orders_id,sys_user_id,medicinal_type_num,medicinal_total_num,status,company_name,phone,freight,business_id,date_created,last_updated,linkman,delivery_time,receiving_time,order_num,is_from )  values ( #{id},#{ordersId},#{sysUserId},#{medicinalTypeNum},#{medicinalTotalNum},#{status},#{companyName},#{phone},#{freight},#{businessId},#{dateCreated},#{lastUpdated},#{linkman},#{deliveryTime},#{receivingTime},#{orderNum},#{isFrom} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.OrderBusiness">
+	update order_business set orders_id=#{ordersId},sys_user_id=#{sysUserId},medicinal_type_num=#{medicinalTypeNum},medicinal_total_num=#{medicinalTotalNum},status=#{status},company_name=#{companyName},phone=#{phone},freight=#{freight},business_id=#{businessId},date_created=#{dateCreated},last_updated=#{lastUpdated},linkman=#{linkman},delivery_time=#{deliveryTime},receiving_time=#{receivingTime},order_num=#{orderNum},is_from=#{isFrom} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from order_business where id = #{id}
+</delete>
+</mapper>

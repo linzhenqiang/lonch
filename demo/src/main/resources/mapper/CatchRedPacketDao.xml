@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.CatchRedPacketDao">
+<resultMap type="com.demo.domain.CatchRedPacket" id="CatchRedPacket" >
+	 <id property="id" column="id" />
+	 <result property="openId" column="open_id" />
+	 <result property="redPacketInfoId" column="red_packet_info_id" />
+	 <result property="clinicId" column="clinic_id" />
+	 <result property="clinicName" column="clinic_name" />
+	 <result property="doctorId" column="doctor_id" />
+	 <result property="doctorName" column="doctor_name" />
+	 <result property="dateCreated" column="date_created" />
+</resultMap>
+<select id="get" resultMap="CatchRedPacket" parameterType="String">
+	select * from catch_red_packet where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.CatchRedPacket">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into catch_red_packet ( id,open_id,red_packet_info_id,clinic_id,clinic_name,doctor_id,doctor_name,date_created )  values ( #{id},#{openId},#{redPacketInfoId},#{clinicId},#{clinicName},#{doctorId},#{doctorName},#{dateCreated} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.CatchRedPacket">
+	update catch_red_packet set open_id=#{openId},red_packet_info_id=#{redPacketInfoId},clinic_id=#{clinicId},clinic_name=#{clinicName},doctor_id=#{doctorId},doctor_name=#{doctorName},date_created=#{dateCreated} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from catch_red_packet where id = #{id}
+</delete>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.EnquiryOrderInfoDao">
+<resultMap type="com.demo.domain.EnquiryOrderInfo" id="EnquiryOrderInfo" >
+	 <id property="id" column="id" />
+	 <result property="enquiryOrderId" column="enquiry_order_id" />
+	 <result property="medicinalId" column="medicinal_id" />
+	 <result property="medicinalName" column="medicinal_name" />
+	 <result property="medicinalCompanyName" column="medicinal_company_name" />
+	 <result property="norms" column="norms" />
+	 <result property="num" column="num" />
+	 <result property="unit" column="unit" />
+	 <result property="smallUnit" column="small_unit" />
+	 <result property="scaler" column="scaler" />
+	 <result property="dateCreated" column="date_created" />
+	 <result property="lastUpdated" column="last_updated" />
+	 <result property="savaStatus" column="sava_status" />
+</resultMap>
+<select id="get" resultMap="EnquiryOrderInfo" parameterType="String">
+	select * from enquiry_order_info where id = #{id}
+</select>
+<insert id="insert" parameterType="com.demo.domain.EnquiryOrderInfo">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE" > select replace(uuid(),'-','') from dual </selectKey>
+	insert into enquiry_order_info ( id,enquiry_order_id,medicinal_id,medicinal_name,medicinal_company_name,norms,num,unit,small_unit,scaler,date_created,last_updated,sava_status )  values ( #{id},#{enquiryOrderId},#{medicinalId},#{medicinalName},#{medicinalCompanyName},#{norms},#{num},#{unit},#{smallUnit},#{scaler},#{dateCreated},#{lastUpdated},#{savaStatus} ) 
+</insert>
+<update id="update" parameterType="com.demo.domain.EnquiryOrderInfo">
+	update enquiry_order_info set enquiry_order_id=#{enquiryOrderId},medicinal_id=#{medicinalId},medicinal_name=#{medicinalName},medicinal_company_name=#{medicinalCompanyName},norms=#{norms},num=#{num},unit=#{unit},small_unit=#{smallUnit},scaler=#{scaler},date_created=#{dateCreated},last_updated=#{lastUpdated},sava_status=#{savaStatus} where id = #{id} 
+</update>
+<delete id="delete" parameterType="String">
+	delete from enquiry_order_info where id = #{id}
+</delete>
+</mapper>
