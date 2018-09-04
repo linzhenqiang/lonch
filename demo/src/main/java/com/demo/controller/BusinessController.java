@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/business")
@@ -34,7 +35,7 @@ public class BusinessController {
     @Cacheable(value = "yi",key = "'one'")
     public String setValue(String key,String val){
         if(!stringRedisTemplate.hasKey(key)){
-            stringRedisTemplate.opsForValue().append(key, val);
+            stringRedisTemplate.opsForValue().set(key, val,90, TimeUnit.SECONDS);
             return "使用redis缓存保存数据成功";
         }else{
             stringRedisTemplate.delete(key);
