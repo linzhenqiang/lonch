@@ -64,6 +64,12 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- 解决spring boot Configuration Annotation Proessor not found in classpath问题(使用@ConfigurationProperties)-->
+		<dependency>
+			<groupId> org.springframework.boot </groupId>
+			<artifactId> spring-boot-configuration-processor </artifactId>
+			<optional> true </optional>
+		</dependency>
 		<!--定时器-->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
