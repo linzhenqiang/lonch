@@ -80,7 +80,7 @@ public class ClinicController {
         SolrInputDocument solr=new SolrInputDocument();
         solr.addField("id", id);
         solr.addField("clinicName", clinicName);
-//        solr.addField("isFrom", "123京津冀第一家");
+        solr.addField("isFrom", "123京津冀第一家");
         try {
             solrClient.add("clinic_core",solr);
             solrClient.commit("clinic_core");
