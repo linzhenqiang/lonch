@@ -37,7 +37,6 @@ public class ClinicController {
             System.out.println("solr搜索结果:" + document);
             return document.toString();
         } else {
-
             System.out.println("没找到!");
             return "";
         }
